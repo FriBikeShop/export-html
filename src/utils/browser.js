@@ -26,9 +26,3 @@ async function getBrowser() {
 }
 
 exports.getBrowser = getBrowser;
-
-exports.getPageCount = async function getPageCount() {
-  const browser = await getBrowser();
-  const openPages = await browser.pages();
-  return openPages.length;
-};

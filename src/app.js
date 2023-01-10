@@ -3,30 +3,19 @@ const Koa = require("koa");
 const bodyParser = require("koa-body");
 const validate = require("./utils/middleware/validate");
 const errorHandler = require("./utils/middleware/error-handler");
-const Sentry = require("@sentry/node");
 const { version } = require("../package.json");
-const config = require("@bedrockio/config");
-const { loggingMiddleware } = require("@bedrockio/instrumentation");
+const logger = require('koa-logger')
 
 const Joi = require("joi");
 
-const { getBrowser, getPageCount } = require("./utils/browser");
+const { getBrowser } = require("./utils/browser");
 
 const app = new Koa();
 
-if (
-  config.has("SENTRY_DSN") &&
-  !["test", "development"].includes(process.env.ENV_NAME)
-) {
-  Sentry.init({
-    dsn: config.get("SENTRY_DSN"),
-    environment: process.env.ENV_NAME,
-  });
-}
 
 app
   .use(bodyParser({ multipart: true }))
-  .use(loggingMiddleware())
+  .use(logger())
   .use(errorHandler);
 
 const router = new Router();
@@ -34,17 +23,12 @@ app.router = router;
 
 router.get("/", (ctx) => {
   ctx.body = {
-    environment: config.get("ENV_NAME"),
+    environment: process.env.ENV_NAME,
     version,
     servedAt: new Date(),
   };
 });
 
-router.get("/check-status", async (ctx) => {
-  ctx.body = {
-    pageCount: await getPageCount(),
-  };
-});
 
 // https://pptr.dev/#?product=Puppeteer&version=v8.0.0&show=api-pagescreenshotoptions
 router.post(

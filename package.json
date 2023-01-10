@@ -1,5 +1,5 @@
 {
-  "name": "@bedrockio/export-html",
+  "name": "@fribikeshop/export-html",
   "version": "1.0.1",
   "license": "MIT",
   "engines": {
@@ -11,13 +11,12 @@
     "lint": "eslint src"
   },
   "dependencies": {
-    "@bedrockio/config": "^2.0.4",
-    "@bedrockio/instrumentation": "^1.4.3",
     "@koa/router": "^10.0.0",
-    "@sentry/node": "^6.2.3",
+    "dotenv": "^16.0.3",
     "joi": "^17.4.0",
     "koa": "^2.13.1",
     "koa-body": "^4.2.0",
+    "koa-logger": "^3.2.1",
     "puppeteer": "5.4"
   },
   "devDependencies": {

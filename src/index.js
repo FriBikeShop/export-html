@@ -1,18 +1,15 @@
-const { logger, setupTelemetry } = require("@bedrockio/instrumentation");
-setupTelemetry();
-
+const config = require('dotenv').config();
 const app = require("./app");
-const config = require("@bedrockio/config");
 const { getBrowser } = require("./utils/browser");
 
-const PORT = config.get("BIND_PORT");
-const HOST = config.get("BIND_HOST");
+const PORT = process.env.BIND_PORT;
+const HOST = process.env.BIND_HOST;
 
 module.exports = (async () => {
   await getBrowser();
 
   app.listen(PORT, HOST, () => {
-    logger.info(`Started on port //${HOST}:${PORT}`);
+    console.info(`Started on port //${HOST}:${PORT}`);
   });
   return app;
 })();

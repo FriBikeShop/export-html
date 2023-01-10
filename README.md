@@ -7,16 +7,7 @@ _Security Note: This is intended to run as a micro service - do not directly exp
 ## Usage
 
 ```bash
-docker run  -p 2305:2305 bedrockio/export-html
-```
-
-Or:
-
-```
-git clone git@github.com:bedrockio/export-html.git
-cd export-html
-yarn install
-yarn start
+docker run  -p 2305:2305 fribikeshop/export-html
 ```
 
 ## Generating a PDF
@@ -57,8 +48,8 @@ Now open `hello.png`
 
 Each API call allows Puppeteer options via `body.export`
 
-- [POST /1/pdf](https://pptr.dev/#?product=Puppeteer&version=v8.0.0&show=api-pagepdfoptions)
-- [POST /1/screenshot](https://pptr.dev/#?product=Puppeteer&version=v8.0.0&show=api-pagescreenshotoptions)
+- [POST /1/pdf](https://pptr.dev/api/puppeteer.page.pdf)
+- [POST /1/screenshot](https://pptr.dev/api/puppeteer.page.screenshot)
 
 ## Kubernetes Deployment Notes
 
@@ -94,7 +85,7 @@ spec:
                         - export-html
                 topologyKey: kubernetes.io/hostname
       containers:
-        - image: bedrockio/export-html
+        - image: fribikeshop/export-html
           imagePullPolicy: Always
           name: export-html
           resources:
@@ -120,8 +111,6 @@ spec:
           emptyDir: {}
 ```
 
-An optional `SENTRY_DSN` environment variable can be configured to enable [Sentry.io](https://sentry.io/) error tracking.
-
 ## Credits
 
-This service is based on the excellent [Puppeteer module](https://github.com/GoogleChrome/puppeteer) and is maintained by Kaare Larsen.
+This service is a fork of [bedrockio/export-html](https://github.com/bedrockio/export-html) based on the excellent [Puppeteer module](https://github.com/GoogleChrome/puppeteer).
