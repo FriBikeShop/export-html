@@ -1,6 +1,6 @@
 {
-  "name": "@fribikeshop/export-html",
-  "version": "1.0.1",
+  "name": "@fribikeshop/html-to",
+  "version": "1.0.0.0",
   "license": "MIT",
   "engines": {
     "node": ">=14"
