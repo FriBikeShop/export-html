@@ -7,7 +7,7 @@ _Security Note: This is intended to run as a micro service - do not directly exp
 ## Usage
 
 ```bash
-docker run  -p 2305:2305 fribikeshop/export-html
+docker run  -p 2305:2305 fribikeshop/html-to
 ```
 
 ## Generating a PDF
@@ -61,7 +61,7 @@ Here's an example of a Kubernetes deployment that limits resources (this is used
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: export-html-deployment
+  name: fribikeshop/html-to
 spec:
   replicas: 3
   selector:
